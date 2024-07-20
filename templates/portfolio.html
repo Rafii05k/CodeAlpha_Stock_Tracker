@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Portfolio Tracker</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stock Portfolio Data</h1>
+    <table border="1">
+        <tr>
+            <th>Symbol</th>
+            <th>Time</th>
+            <th>Open</th>
+            <th>High</th>
+            <th>Low</th>
+            <th>Close</th>
+            <th>Volume</th>
+        </tr>
+        {% for data in stock_data %}
+            {% if data.error %}
+                <tr>
+                    <td colspan="7">{{ data.symbol }}: {{ data.error }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td>{{ data.symbol }}</td>
+                    <td>{{ data.time }}</td>
+                    <td>{{ data.open }}</td>
+                    <td>{{ data.high }}</td>
+                    <td>{{ data.low }}</td>
+                    <td>{{ data.close }}</td>
+                    <td>{{ data.volume }}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('index') }}">Back to Portfolio</a>
+</body>
+</html>
